@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 
@@ -5,7 +6,7 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   plugins: [react()],
   server: {
-    // CurrencyBeacon sends no CORS headers, 
+    // CurrencyBeacon sends no CORS headers,
     // so proxy API calls through the dev server
     proxy: {
       '/api': {
@@ -14,5 +15,12 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
     },
+  },
+  test: {
+    environment: 'jsdom',
+    setupFiles: './src/test/setup.ts',
+    // Undo vi.spyOn / vi.stubEnv after every test automatically
+    restoreMocks: true,
+    unstubEnvs: true,
   },
 })

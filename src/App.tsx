@@ -1,10 +1,17 @@
+import { useState } from 'react'
 import heroImg from './assets/hero.png'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import './App.css'
-import { Currencies } from './components/Currencies'
+
+import { AmountInput } from './components/AmountInput'
+import { ConversionResult } from './components/ConversionResult'
+import { CurrencySelect } from './components/CurrencySelect'
 
 function App() {
+  const [amount, setAmount] = useState('')
+  const [fromCurrency, setFromCurrency] = useState('')
+  const [toCurrency, setToCurrency] = useState('')
 
   return (
     <>
@@ -16,9 +23,7 @@ function App() {
         </div>
         <div>
           <h1>Currency Conversion Tool</h1>
-          <Currencies />
         </div>
-
       </section>
 
       <div className="ticks"></div>
@@ -26,21 +31,25 @@ function App() {
       <section id="next-steps">
         {/* left hand side */}
         <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-         
+          <AmountInput value={amount} onChange={setAmount} />
+          <CurrencySelect
+            label="From"
+            value={fromCurrency}
+            onChange={setFromCurrency}
+          />
         </div>
         {/* right hand side */}
         <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          
+          <CurrencySelect
+            label="To"
+            value={toCurrency}
+            onChange={setToCurrency}
+          />
+          <ConversionResult
+            from={fromCurrency}
+            to={toCurrency}
+            amount={Number(amount)}
+          />
         </div>
       </section>
 

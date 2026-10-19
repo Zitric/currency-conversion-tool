@@ -15,7 +15,7 @@ function App() {
 
   return (
     <>
-      <section id="center">
+      <section>
         <div className="hero">
           <img src={heroImg} className="base" width="170" height="179" alt="" />
           <img src={reactLogo} className="framework" alt="React logo" />
@@ -26,11 +26,8 @@ function App() {
         </div>
       </section>
 
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        {/* left hand side */}
-        <div id="docs">
+      <section className="converter">
+        <div className="converter-row">
           <AmountInput value={amount} onChange={setAmount} />
           <CurrencySelect
             label="From"
@@ -38,23 +35,19 @@ function App() {
             onChange={setFromCurrency}
           />
         </div>
-        {/* right hand side */}
-        <div id="social">
-          <CurrencySelect
-            label="To"
-            value={toCurrency}
-            onChange={setToCurrency}
-          />
+        <div className="converter-row">
           <ConversionResult
             from={fromCurrency}
             to={toCurrency}
             amount={Number(amount)}
           />
+          <CurrencySelect
+            label="To"
+            value={toCurrency}
+            onChange={setToCurrency}
+          />
         </div>
       </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
     </>
   )
 }

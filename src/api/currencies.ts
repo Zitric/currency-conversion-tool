@@ -1,4 +1,4 @@
-export const API_URL = '/api/v1'
+import { API_URL } from './util'
 
 export type Currency = {
   id: number

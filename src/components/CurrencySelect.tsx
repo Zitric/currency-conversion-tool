@@ -16,22 +16,26 @@ export function CurrencySelect({
   const id = useId()
   const { data: currencies, isPending, isError, error } = useCurrencies()
 
-  if (isError) return <p role="alert">{error.message}</p>
-
   return (
-    <>
+    <div className="field">
       <label htmlFor={id}>{label}</label>
-      <select
-        id={id}
-        value={value}
-        onChange={(event) => onChange(event.target.value)}
-        disabled={isPending}
-      >
-        <option value="" disabled>
-          {isPending ? 'Loading currencies…' : 'Select a currency'}
-        </option>
-        {currencies && <CurrencyOptions currencies={currencies} />}
-      </select>
-    </>
+      {isError ? (
+        <p role="alert" className="error">
+          {error.message}
+        </p>
+      ) : (
+        <select
+          id={id}
+          value={value}
+          onChange={(event) => onChange(event.target.value)}
+          disabled={isPending}
+        >
+          <option value="" disabled>
+            {isPending ? 'Loading currencies…' : 'Select a currency'}
+          </option>
+          {currencies && <CurrencyOptions currencies={currencies} />}
+        </select>
+      )}
+    </div>
   )
 }

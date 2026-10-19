@@ -9,7 +9,7 @@ export function AmountInput({ value, onChange }: AmountInputProps) {
   const id = useId()
 
   return (
-    <>
+    <div className="field">
       <label htmlFor={id}>Amount</label>
       <input
         id={id}
@@ -21,6 +21,6 @@ export function AmountInput({ value, onChange }: AmountInputProps) {
         value={value}
         onChange={(event) => onChange(event.target.value)}
       />
-    </>
+    </div>
   )
 }

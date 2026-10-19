@@ -1,4 +1,4 @@
-import { API_URL } from './currencies'
+import { API_URL } from './util'
 
 export type ConversionParams = {
   from: string

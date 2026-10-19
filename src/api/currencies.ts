@@ -1,4 +1,4 @@
-import { API_URL } from './util'
+import { API_URL, assertOk } from './util'
 
 export type Currency = {
   id: number
@@ -7,6 +7,8 @@ export type Currency = {
   symbol: string
 }
 
+// The API also repeats the list at the top level as "0", "1", "2"… keys.
+// We read `response` because it's the main data node and a real array.
 type CurrenciesResponse = {
   response: Currency[]
 }
@@ -18,9 +20,7 @@ export async function fetchCurrencies(): Promise<Currency[]> {
 
   const response = await fetch(`${API_URL}/currencies`, { headers })
 
-  if (!response.ok) {
-    throw new Error(`Failed to fetch currencies (${response.status})`)
-  }
+  assertOk(response, 'Failed to fetch currencies')
 
   const data: CurrenciesResponse = await response.json()
   return data.response

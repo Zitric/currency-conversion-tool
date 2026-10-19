@@ -1,4 +1,4 @@
-import { API_URL } from './util'
+import { API_URL, assertOk } from './util'
 
 export type ConversionParams = {
   from: string
@@ -6,6 +6,8 @@ export type ConversionParams = {
   amount: number
 }
 
+// The API also repeats these fields at the top level (value, date…).
+// We read `response` because it's the main data node, same as /currencies.
 type ConvertResponse = {
   response: { value: number }
 }
@@ -21,9 +23,7 @@ export async function fetchConversion({
   }
   const response = await fetch(`${API_URL}/convert?${params}`, { headers })
 
-  if (!response.ok) {
-    throw new Error(`Failed to convert currency (${response.status})`)
-  }
+  assertOk(response, 'Failed to convert currency')
 
   const data: ConvertResponse = await response.json()
   return data.response.value

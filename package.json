@@ -1,5 +1,5 @@
 {
-  "name": "currenty-conversion-tool",
+  "name": "currency-conversion-tool",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -11,6 +11,7 @@
     "lint:fix": "biome lint --write ."
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.104.4",
     "react": "^19.3.1",
     "react-dom": "^19.3.1"
   },
